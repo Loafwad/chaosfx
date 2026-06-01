@@ -1,0 +1,38 @@
+### health
+GET http://127.0.0.1:18244/health
+
+### enqueue pink
+POST http://127.0.0.1:18244/rewards/enqueue
+content-type: application/json
+
+{
+  "rewardKey": "pink_mode",
+  "durationMs": 15000,
+  "source": "twitch:sample_viewer"
+}
+
+### enqueue kaleidoscope
+POST http://127.0.0.1:18244/rewards/enqueue
+content-type: application/json
+
+{
+  "rewardKey": "kaleidoscope",
+  "durationMs": 20000,
+  "source": "twitch:sample_viewer"
+}
+
+### enqueue mirror
+POST http://127.0.0.1:18244/rewards/enqueue
+content-type: application/json
+
+{
+  "rewardKey": "mirrored_screen",
+  "durationMs": 12000,
+  "source": "twitch:sample_viewer"
+}
+
+### pop next
+GET http://127.0.0.1:18244/rewards/next
+
+### clear
+POST http://127.0.0.1:18244/rewards/clear

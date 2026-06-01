@@ -1,0 +1,3 @@
+C:/Users/nathb/dev/chaosfx/d3dproxy/build/CMakeFiles/d3d11.dir
+C:/Users/nathb/dev/chaosfx/d3dproxy/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/nathb/dev/chaosfx/d3dproxy/build/CMakeFiles/ZERO_CHECK.dir

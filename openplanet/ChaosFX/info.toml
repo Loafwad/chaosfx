@@ -1,0 +1,8 @@
+[meta]
+name = "ChaosFX"
+author = "ChaosFX"
+version = "0.1.0"
+category = "Overlay"
+
+[script]
+timeout = 0
