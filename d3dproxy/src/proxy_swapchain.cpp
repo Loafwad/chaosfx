@@ -1,4 +1,5 @@
 #include "proxy.h"
+#include "effects.h"
 #include <dxgi1_2.h>
 
 // IDXGIFactory vtable slot for CreateSwapChain
@@ -18,6 +19,34 @@ static PFN_CreateSwapChain        g_OrigCreateSwapChain        = nullptr;
 static PFN_CreateSwapChainForHwnd g_OrigCreateSwapChainForHwnd = nullptr;
 static bool                       g_Hooked                     = false;
 
+static void PatchSlot(void** vtable, int slot, void* newFn, void** outOrig)
+{
+    *outOrig = vtable[slot];
+    DWORD old;
+    VirtualProtect(&vtable[slot], sizeof(void*), PAGE_READWRITE, &old);
+    vtable[slot] = newFn;
+    VirtualProtect(&vtable[slot], sizeof(void*), old, &old);
+}
+
+// ── Present hook ──────────────────────────────────────────────────────────
+// IDXGISwapChain vtable: IUnknown(0-2) + IDXGIObject(3-6) +
+//   IDXGIDeviceSubObject(7) + IDXGISwapChain::Present = slot 8
+static constexpr int SLOT_Present = 8;
+
+typedef HRESULT (STDMETHODCALLTYPE* PFN_Present)(IDXGISwapChain*, UINT, UINT);
+static PFN_Present g_OrigPresent = nullptr;
+
+static HRESULT STDMETHODCALLTYPE Hook_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
+{
+    // Initialize D3D11 effect objects on first call (idempotent CAS — runs only once)
+    if (g_CfxDevice && g_CfxContext)
+        chaosfx::effects::Initialize(g_CfxDevice, g_CfxContext, pSwapChain);
+
+    chaosfx::effects::RenderFrame();
+
+    return g_OrigPresent(pSwapChain, SyncInterval, Flags);
+}
+
 static void CaptureSwapChain(IDXGISwapChain* sc)
 {
     // Only capture the first swapchain — that's the game's main one.
@@ -25,7 +54,18 @@ static void CaptureSwapChain(IDXGISwapChain* sc)
         g_CfxSwapChain = sc;
         g_CfxSwapChain->AddRef();
         OutputDebugStringA("[ChaosFXProxy] Swapchain captured, g_CfxReady=1\n");
+        Proxy_HookPresent(sc);
     }
+}
+
+void Proxy_HookPresent(IDXGISwapChain* sc)
+{
+    if (g_OrigPresent) return; // already hooked
+    void** vt = *reinterpret_cast<void***>(sc);
+    PatchSlot(vt, SLOT_Present,
+              reinterpret_cast<void*>(&Hook_Present),
+              reinterpret_cast<void**>(&g_OrigPresent));
+    OutputDebugStringA("[ChaosFXProxy] IDXGISwapChain::Present hooked\n");
 }
 
 static HRESULT STDMETHODCALLTYPE Hook_CreateSwapChain(
@@ -48,15 +88,6 @@ static HRESULT STDMETHODCALLTYPE Hook_CreateSwapChainForHwnd(
     if (SUCCEEDED(hr) && ppSwapChain && *ppSwapChain)
         CaptureSwapChain(*ppSwapChain);
     return hr;
-}
-
-static void PatchSlot(void** vtable, int slot, void* newFn, void** outOrig)
-{
-    *outOrig = vtable[slot];
-    DWORD old;
-    VirtualProtect(&vtable[slot], sizeof(void*), PAGE_READWRITE, &old);
-    vtable[slot] = newFn;
-    VirtualProtect(&vtable[slot], sizeof(void*), old, &old);
 }
 
 // Called from D3D11CreateDevice intercept once we have the device.

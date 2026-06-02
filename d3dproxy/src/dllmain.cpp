@@ -1,4 +1,6 @@
 #include "proxy.h"
+#include "http_poll.h"
+#include "log.h"
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID)
 {
@@ -15,6 +17,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD reason, LPVOID)
             return FALSE;
         }
         OutputDebugStringA("[ChaosFXProxy] Real d3d11.dll loaded — proxy active\n");
+        chaosfx::log::begin_session();
+        Proxy_StartPolling();
     }
     return TRUE;
 }

@@ -1,0 +1,9 @@
+# Dependencies
+controller/node_modules/
+
+# Secrets — never commit
+controller/.env
+
+# Build outputs
+pipeline/build/
+d3dproxy/build/

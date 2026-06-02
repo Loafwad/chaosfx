@@ -87,7 +87,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -112,10 +112,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";d3d11_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -123,7 +123,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dxgi.lib;dxguid.lib;d3dcompiler.lib;winhttp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -143,7 +143,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -169,10 +169,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";d3d11_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -180,7 +180,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dxgi.lib;dxguid.lib;d3dcompiler.lib;winhttp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -200,7 +200,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -226,10 +226,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";d3d11_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -237,7 +237,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dxgi.lib;dxguid.lib;d3dcompiler.lib;winhttp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -257,7 +257,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <BufferSecurityCheck></BufferSecurityCheck>
@@ -282,10 +282,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";d3d11_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\nathb\dev\chaosfx\d3dproxy\src;C:\Users\nathb\dev\chaosfx\d3dproxy\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -293,7 +293,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>dxgi.lib;dxguid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>dxgi.lib;dxguid.lib;d3dcompiler.lib;winhttp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <DataExecutionPrevention></DataExecutionPrevention>
@@ -311,6 +311,230 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\pink_mode.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Embedding shader pink_mode.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/pink_mode.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/pink_mode.h" -DVAR="k_PinkShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\pink_mode.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Embedding shader pink_mode.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/pink_mode.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/pink_mode.h" -DVAR="k_PinkShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\pink_mode.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Embedding shader pink_mode.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/pink_mode.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/pink_mode.h" -DVAR="k_PinkShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\pink_mode.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Embedding shader pink_mode.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/pink_mode.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/pink_mode.h" -DVAR="k_PinkShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\pink_mode.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\kaleidoscope.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Embedding shader kaleidoscope.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/kaleidoscope.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/kaleidoscope.h" -DVAR="k_KaleidoscopeShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\kaleidoscope.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Embedding shader kaleidoscope.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/kaleidoscope.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/kaleidoscope.h" -DVAR="k_KaleidoscopeShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\kaleidoscope.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Embedding shader kaleidoscope.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/kaleidoscope.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/kaleidoscope.h" -DVAR="k_KaleidoscopeShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\kaleidoscope.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Embedding shader kaleidoscope.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/kaleidoscope.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/kaleidoscope.h" -DVAR="k_KaleidoscopeShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\kaleidoscope.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\mirror.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Embedding shader mirror.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/mirror.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/mirror.h" -DVAR="k_MirrorShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\mirror.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Embedding shader mirror.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/mirror.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/mirror.h" -DVAR="k_MirrorShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\mirror.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Embedding shader mirror.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/mirror.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/mirror.h" -DVAR="k_MirrorShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\mirror.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Embedding shader mirror.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/mirror.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/mirror.h" -DVAR="k_MirrorShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\mirror.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\flipped_screen.h.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Embedding shader flipped_screen.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/flipped_screen.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/flipped_screen.h" -DVAR="k_FlipShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\flipped_screen.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Embedding shader flipped_screen.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/flipped_screen.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/flipped_screen.h" -DVAR="k_FlipShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\flipped_screen.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Embedding shader flipped_screen.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/flipped_screen.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/flipped_screen.h" -DVAR="k_FlipShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\flipped_screen.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Embedding shader flipped_screen.hlsl</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/flipped_screen.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/flipped_screen.h" -DVAR="k_FlipShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects\flipped_screen.hlsl;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
@@ -373,6 +597,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_globals.cpp" />
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_exports.cpp" />
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_swapchain.cpp" />
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects.cpp" />
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\http_poll.cpp" />
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h" />
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h" />
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h" />
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h" />
     <None Include="C:\Users\nathb\dev\chaosfx\d3dproxy\d3d11.def" />
   </ItemGroup>
   <ItemGroup />

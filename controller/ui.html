@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChaosFX</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-base-100 min-h-screen p-8">
+    <div class="max-w-lg">
+      <h1 class="text-3xl font-bold tracking-tight mb-6">ChaosFX</h1>
+
+      <!-- Status bar -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        <div class="badge badge-success gap-2">
+          <span class="w-2 h-2 rounded-full bg-current opacity-80"></span>
+          Bridge running
+        </div>
+        <div id="tw-badge" class="badge badge-error gap-2">
+          <span class="w-2 h-2 rounded-full bg-current opacity-80"></span>
+          <span id="tw-label">Twitch…</span>
+        </div>
+        <div class="badge badge-neutral gap-1">Queue: <b id="queued">0</b></div>
+      </div>
+
+      <!-- Control -->
+      <div class="card bg-base-200 mb-4">
+        <div class="card-body py-5">
+          <p
+            class="text-xs uppercase tracking-widest text-base-content/40 mb-3"
+          >
+            Control
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button
+              id="toggle-btn"
+              onclick="toggleEnabled()"
+              class="btn btn-success min-w-28"
+            >
+              …
+            </button>
+            <button onclick="clearQueue()" class="btn btn-ghost">
+              Clear queue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Test effects -->
+      <div class="card bg-base-200">
+        <div class="card-body py-5">
+          <p
+            class="text-xs uppercase tracking-widest text-base-content/40 mb-3"
+          >
+            Test effects
+          </p>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="label-text text-base-content/50">Duration</span>
+            <input
+              type="number"
+              id="dur"
+              value="10"
+              min="1"
+              max="300"
+              class="input input-bordered input-sm w-20"
+            />
+            <span class="label-text text-base-content/50">seconds</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button
+              onclick="trigger('pink_mode')"
+              class="btn bg-pink-600 hover:bg-pink-500 border-none text-white"
+            >
+              Pink Mode
+            </button>
+            <button
+              onclick="trigger('kaleidoscope')"
+              class="btn bg-violet-700 hover:bg-violet-600 border-none text-white"
+            >
+              Kaleidoscope
+            </button>
+            <button
+              onclick="trigger('mirrored_screen')"
+              class="btn bg-cyan-700 hover:bg-cyan-600 border-none text-white"
+            >
+              Mirror
+            </button>
+            <button
+              onclick="trigger('flipped_screen')"
+              class="btn bg-amber-600 hover:bg-amber-500 border-none text-white"
+            >
+              Flipped
+            </button>
+          </div>
+          <p
+            id="last-trigger"
+            class="text-xs text-base-content/30 mt-3 min-h-4"
+          ></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/ui.js"></script>
+  </body>
+</html>

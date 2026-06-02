@@ -13,8 +13,40 @@
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_swapchain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\http_poll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\pink_mode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\kaleidoscope.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\mirror.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\effects\flipped_screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\pink_mode.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\kaleidoscope.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\mirror.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\build\CMakeFiles\aba6512f75e3c941f7df6ac5e7011361\flipped_screen.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
     <CustomBuild Include="C:\Users\nathb\dev\chaosfx\d3dproxy\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -23,6 +55,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{80436D90-26D0-31E4-9BB0-AE67FCFAAC25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{1E73EC00-63B0-3FF2-BBB0-EE065510ABA8}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{66591212-DE20-34CE-8CDB-3EB599814207}</UniqueIdentifier>
     </Filter>

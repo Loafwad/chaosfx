@@ -1,7 +1,0 @@
-LIBRARY ChaosFXPipeline
-EXPORTS
-    InitializeDX11Hook
-    ReleaseDX11Hook
-    RenderEffect
-    SetEffect
-    ClearEffect

@@ -147,6 +147,7 @@ extern "C" HRESULT WINAPI D3D11CreateDeviceAndSwapChain(
             g_CfxSwapChain->AddRef();
             InterlockedExchange(&g_CfxReady, 1);
             OutputDebugStringA("[ChaosFXProxy] D3D11CreateDeviceAndSwapChain captured all\n");
+            Proxy_HookPresent(*ppSwapChain);
         } else if (g_CfxDevice) {
             Proxy_HookFactory(g_CfxDevice);
         }

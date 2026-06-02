@@ -2,3 +2,5 @@ C:\Users\nathb\dev\chaosfx\d3dproxy\src\dllmain.cpp;C:\Users\nathb\dev\chaosfx\d
 C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_globals.cpp;C:\Users\nathb\dev\chaosfx\d3dproxy\build\d3d11.dir\Release\proxy_globals.obj
 C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_exports.cpp;C:\Users\nathb\dev\chaosfx\d3dproxy\build\d3d11.dir\Release\proxy_exports.obj
 C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_swapchain.cpp;C:\Users\nathb\dev\chaosfx\d3dproxy\build\d3d11.dir\Release\proxy_swapchain.obj
+C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects.cpp;C:\Users\nathb\dev\chaosfx\d3dproxy\build\d3d11.dir\Release\effects.obj
+C:\Users\nathb\dev\chaosfx\d3dproxy\src\http_poll.cpp;C:\Users\nathb\dev\chaosfx\d3dproxy\build\d3d11.dir\Release\http_poll.obj

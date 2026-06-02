@@ -1,11 +1,26 @@
 const http = require('http');
 const { URL } = require('url');
+const fs = require('fs');
+const path = require('path');
+const { REWARD_MAP } = require('./rewards');
 
 const PORT = Number(process.env.CHAOSFX_BRIDGE_PORT || 18244);
 const HOST = process.env.CHAOSFX_BRIDGE_HOST || '127.0.0.1';
 
-const allowedRewards = new Set(['pink_mode', 'kaleidoscope', 'mirrored_screen']);
+const allowedRewards = new Set(Object.values(REWARD_MAP));
 const queue = [];
+let enabled = true;
+let twitchConnected = false;
+let twitchLastSeen = 0;
+
+const UI_HTML_PATH = path.join(__dirname, 'ui.html');
+const UI_JS_PATH = path.join(__dirname, 'ui.js');
+
+// Inverted REWARD_MAP for the browser: { rewardKey: 'Display Name' }
+const REWARD_KEY_NAMES = Object.fromEntries(
+    Object.entries(REWARD_MAP).map(([title, key]) => [key, title])
+);
+
 
 function sendJson(res, status, body) {
     const data = JSON.stringify(body);
@@ -62,12 +77,51 @@ function normalizeReward(payload) {
 async function handleRequest(req, res) {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
 
+    if (req.method === 'GET' && url.pathname === '/') {
+        const html = fs.readFileSync(UI_HTML_PATH, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+        return res.end(html);
+    }
+
+    if (req.method === 'GET' && url.pathname === '/ui.js') {
+        const js = fs.readFileSync(UI_JS_PATH, 'utf8');
+        res.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
+        return res.end(js);
+    }
+
+    if (req.method === 'GET' && url.pathname === '/rewards/map') {
+        return sendJson(res, 200, REWARD_KEY_NAMES);
+    }
+
     if (req.method === 'GET' && url.pathname === '/health') {
-        return sendJson(res, 200, { ok: true, queued: queue.length });
+        // Twitch is considered connected if it sent a heartbeat in the last 60s
+        const tc = twitchConnected && (Date.now() - twitchLastSeen < 60_000);
+        return sendJson(res, 200, { ok: true, queued: queue.length, enabled, twitchConnected: tc });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/enable') {
+        enabled = true;
+        return sendJson(res, 200, { enabled });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/disable') {
+        enabled = false;
+        return sendJson(res, 200, { enabled });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/twitch/heartbeat') {
+        twitchConnected = true;
+        twitchLastSeen = Date.now();
+        return sendEmpty(res, 204);
+    }
+
+    if (req.method === 'POST' && url.pathname === '/twitch/disconnect') {
+        twitchConnected = false;
+        return sendEmpty(res, 204);
     }
 
     if (req.method === 'GET' && url.pathname === '/rewards/next') {
-        if (queue.length === 0) {
+        if (!enabled || queue.length === 0) {
             return sendEmpty(res, 204);
         }
 
