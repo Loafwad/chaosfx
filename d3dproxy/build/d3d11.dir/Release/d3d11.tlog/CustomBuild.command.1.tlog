@@ -1,3 +1,43 @@
+^C:\USERS\NATHB\DEV\CHAOSFX\D3DPROXY\BUILD\CMAKEFILES\ABA6512F75E3C941F7DF6AC5E7011361\PINK_MODE.H.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/pink_mode.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/pink_mode.h" -DVAR="k_PinkShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\NATHB\DEV\CHAOSFX\D3DPROXY\BUILD\CMAKEFILES\ABA6512F75E3C941F7DF6AC5E7011361\KALEIDOSCOPE.H.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/kaleidoscope.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/kaleidoscope.h" -DVAR="k_KaleidoscopeShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\NATHB\DEV\CHAOSFX\D3DPROXY\BUILD\CMAKEFILES\ABA6512F75E3C941F7DF6AC5E7011361\MIRROR.H.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/mirror.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/mirror.h" -DVAR="k_MirrorShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\NATHB\DEV\CHAOSFX\D3DPROXY\BUILD\CMAKEFILES\ABA6512F75E3C941F7DF6AC5E7011361\FLIPPED_SCREEN.H.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -DINPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/src/effects/flipped_screen.hlsl" -DOUTPUT="C:/Users/nathb/dev/chaosfx/d3dproxy/build/effects/flipped_screen.h" -DVAR="k_FlipShaderSrc" -P C:/Users/nathb/dev/chaosfx/d3dproxy/cmake/embed_shader.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
 ^C:\USERS\NATHB\DEV\CHAOSFX\D3DPROXY\CMAKELISTS.TXT
 setlocal
 "C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/nathb/dev/chaosfx/d3dproxy -BC:/Users/nathb/dev/chaosfx/d3dproxy/build --check-stamp-file C:/Users/nathb/dev/chaosfx/d3dproxy/build/CMakeFiles/generate.stamp

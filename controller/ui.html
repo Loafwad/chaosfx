@@ -24,6 +24,10 @@
           <span class="w-2 h-2 rounded-full bg-current opacity-80"></span>
           <span id="tw-label">Twitch…</span>
         </div>
+        <div id="game-badge" class="badge badge-error gap-2">
+          <span class="w-2 h-2 rounded-full bg-current opacity-80"></span>
+          <span id="game-label">Game not running</span>
+        </div>
         <div class="badge badge-neutral gap-1">Queue: <b id="queued">0</b></div>
       </div>
 
@@ -100,6 +104,145 @@
             id="last-trigger"
             class="text-xs text-base-content/30 mt-3 min-h-4"
           ></p>
+        </div>
+      </div>
+      <!-- Draw Call Debug -->
+      <div class="card bg-base-200">
+        <div class="card-body py-5">
+          <p
+            class="text-xs uppercase tracking-widest text-base-content/40 mb-3"
+          >
+            Draw Call Debug
+          </p>
+          <!-- Skip-N stepper -->
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-sm text-base-content/50">Skip draw #</span>
+            <button
+              onclick="skipAdjust(-10)"
+              class="btn btn-xs btn-ghost font-mono"
+            >
+              −10
+            </button>
+            <button
+              onclick="skipAdjust(-1)"
+              class="btn btn-xs btn-ghost font-mono"
+            >
+              −
+            </button>
+            <input
+              id="skip-n"
+              type="text"
+              inputmode="numeric"
+              value="—"
+              class="font-mono w-14 text-center text-sm px-2 py-0.5 bg-base-300 rounded border-0 outline-none focus:ring-1 focus:ring-primary"
+              onchange="skipSetDirect(this.value)"
+              onkeydown="if(event.key==='Enter')this.blur()"
+            />
+            <button
+              onclick="skipAdjust(1)"
+              class="btn btn-xs btn-ghost font-mono"
+            >
+              +
+            </button>
+            <button
+              onclick="skipAdjust(10)"
+              class="btn btn-xs btn-ghost font-mono"
+            >
+              +10
+            </button>
+            <button
+              onclick="skipClear()"
+              class="btn btn-xs btn-ghost text-error font-mono ml-1"
+            >
+              ✕
+            </button>
+          </div>
+          <!-- Frame stats from C++ -->
+          <div class="flex gap-4 mb-3 text-xs text-base-content/50 font-mono">
+            <span>draws/frame: <b id="draws-per-frame">—</b></span>
+            <span>C++ N: <b id="active-skip-n">—</b></span>
+            <span>hooks: <b id="hooks-installed">—</b></span>
+          </div>
+          <!-- Shader histogram -->
+          <div class="mt-1 mb-2">
+            <div class="flex items-center gap-2 mb-1">
+              <span
+                class="text-xs text-base-content/40 uppercase tracking-widest"
+                >Shader pairs</span
+              >
+              <button
+                onclick="loadHist()"
+                class="btn btn-xs btn-ghost font-mono"
+              >
+                ↻ refresh
+              </button>
+              <button
+                onclick="clearSkipPairs()"
+                class="btn btn-xs btn-ghost text-error font-mono"
+              >
+                clear
+              </button>
+            </div>
+            <div class="text-xs font-mono mb-1 text-base-content/40">
+              active: <span id="active-shader">none</span>
+            </div>
+            <div
+              id="hist-table"
+              class="font-mono text-xs bg-base-300 rounded p-2 max-h-48 overflow-y-auto space-y-px"
+            >
+              <div class="text-base-content/30 italic">press refresh…</div>
+            </div>
+          </div>
+          <!-- Index-count histogram -->
+          <div class="mt-3">
+            <div class="flex items-center gap-2 mb-1">
+              <span
+                class="text-xs text-base-content/40 uppercase tracking-widest"
+                >Index counts</span
+              >
+              <button
+                onclick="loadIdxHist()"
+                class="btn btn-xs btn-ghost font-mono"
+              >
+                ↻ refresh
+              </button>
+              <button
+                onclick="clearSkipIndexCounts()"
+                class="btn btn-xs btn-ghost text-error font-mono"
+              >
+                clear
+              </button>
+            </div>
+            <div class="text-xs font-mono mb-1 text-base-content/40">
+              active: <span id="active-idx-count">none</span>
+            </div>
+            <div
+              id="idx-hist-table"
+              class="font-mono text-xs bg-base-300 rounded p-2 max-h-48 overflow-y-auto space-y-px"
+            >
+              <div class="text-base-content/30 italic">press refresh…</div>
+            </div>
+          </div>
+          <!-- Last captured draw info -->
+          <div
+            id="skip-info"
+            class="hidden font-mono text-xs bg-base-300 rounded p-3 mb-2 break-all"
+          >
+            <div class="flex justify-between items-start">
+              <span id="skip-info-text" class="whitespace-pre"></span>
+              <button
+                onclick="skipCopyInfo()"
+                class="btn btn-xs btn-ghost ml-2 shrink-0"
+              >
+                copy
+              </button>
+            </div>
+          </div>
+          <!-- Capture log -->
+          <div
+            id="skip-log"
+            class="text-xs text-base-content/40 space-y-0.5 max-h-36 overflow-y-auto"
+          ></div>
         </div>
       </div>
     </div>

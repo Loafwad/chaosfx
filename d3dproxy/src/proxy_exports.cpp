@@ -1,4 +1,5 @@
 #include "proxy.h"
+#include "proxy_drawcall.h"
 #include <d3d11_1.h>
 
 // Helper: get a proc from the real d3d11.dll
@@ -88,7 +89,8 @@ extern "C" HRESULT WINAPI D3D11CreateDevice(
     auto fn = RealFn<decltype(&D3D11CreateDevice)>("D3D11CreateDevice");
     if (!fn) return E_NOTIMPL;
 
-    HRESULT hr = fn(pAdapter, DriverType, Software, Flags,
+    HRESULT hr = fn(pAdapter, DriverType, Software,
+                    Flags & ~D3D11_CREATE_DEVICE_DEBUG,  // no debug layer: keeps shared vtable
                     pFeatureLevels, FeatureLevels, SDKVersion,
                     ppDevice, pFeatureLevel, ppImmediateContext);
 
@@ -102,6 +104,7 @@ extern "C" HRESULT WINAPI D3D11CreateDevice(
             (*ppDevice)->GetImmediateContext(&g_CfxContext);
         }
         OutputDebugStringA("[ChaosFXProxy] D3D11CreateDevice captured, hooking factory\n");
+        Proxy_HookShaderCreate(*ppDevice);
         Proxy_HookFactory(*ppDevice);
     }
     return hr;
@@ -127,7 +130,8 @@ extern "C" HRESULT WINAPI D3D11CreateDeviceAndSwapChain(
     auto fn = RealFn<decltype(&D3D11CreateDeviceAndSwapChain)>("D3D11CreateDeviceAndSwapChain");
     if (!fn) return E_NOTIMPL;
 
-    HRESULT hr = fn(pAdapter, DriverType, Software, Flags,
+    HRESULT hr = fn(pAdapter, DriverType, Software,
+                    Flags & ~D3D11_CREATE_DEVICE_DEBUG,  // no debug layer: keeps shared vtable
                     pFeatureLevels, FeatureLevels, SDKVersion, pSwapChainDesc,
                     ppSwapChain, ppDevice, pFeatureLevel, ppImmediateContext);
 
@@ -147,8 +151,12 @@ extern "C" HRESULT WINAPI D3D11CreateDeviceAndSwapChain(
             g_CfxSwapChain->AddRef();
             InterlockedExchange(&g_CfxReady, 1);
             OutputDebugStringA("[ChaosFXProxy] D3D11CreateDeviceAndSwapChain captured all\n");
+            Proxy_HookShaderCreate(*ppDevice);
             Proxy_HookPresent(*ppSwapChain);
+            if (g_CfxContext)
+                Proxy_HookDrawCalls(g_CfxContext);
         } else if (g_CfxDevice) {
+            Proxy_HookShaderCreate(g_CfxDevice);
             Proxy_HookFactory(g_CfxDevice);
         }
     }

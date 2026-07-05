@@ -2,6 +2,7 @@ const http = require('http');
 const { URL } = require('url');
 const fs = require('fs');
 const path = require('path');
+const { spawnSync } = require('child_process');
 const { REWARD_MAP } = require('./rewards');
 
 const PORT = Number(process.env.CHAOSFX_BRIDGE_PORT || 18244);
@@ -12,6 +13,25 @@ const queue = [];
 let enabled = true;
 let twitchConnected = false;
 let twitchLastSeen = 0;
+
+// ── Draw call debug ───────────────────────────────────────────────────────────
+let skipDrawN = -1;
+let lastSkip = null;
+let frameStats = null;
+let shaderHist = [];   // [{vs, ps, n}] sorted ascending by n
+let skipPairs = [];        // [{vs, ps}] — currently suppressed shader pairs
+let skipIndexCounts = [];  // [3840, 1200, ...] — suppressed index/vertex counts
+let indexCountHist = [];   // [{c, n}] — index count histogram from C++
+// ── Game running detection ────────────────────────────────────────────────────
+let gameRunning = false;
+function refreshGameRunning() {
+    try {
+        const r = spawnSync('tasklist', ['/FI', 'IMAGENAME eq Trackmania.exe', '/NH'], { encoding: 'utf8', timeout: 2000 });
+        gameRunning = r.stdout.toLowerCase().includes('trackmania');
+    } catch { gameRunning = false; }
+}
+refreshGameRunning();
+setInterval(refreshGameRunning, 5000);
 
 const UI_HTML_PATH = path.join(__dirname, 'ui.html');
 const UI_JS_PATH = path.join(__dirname, 'ui.js');
@@ -93,10 +113,79 @@ async function handleRequest(req, res) {
         return sendJson(res, 200, REWARD_KEY_NAMES);
     }
 
+    if (req.method === 'GET' && url.pathname === '/debug/state') {
+        // Serialize pairs as "vs,ps;vs,ps;..." so C++ can parse without a JSON library
+        const skipPairsStr = skipPairs.map(p => `${p.vs},${p.ps}`).join(';');
+        const skipIndexCountsStr = skipIndexCounts.join(',');
+        return sendJson(res, 200, { skipDrawN, lastSkip, frameStats, skipPairs: skipPairsStr, skipIndexCounts: skipIndexCountsStr });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/skip-draw') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        skipDrawN = Number.isInteger(payload.n) ? Math.max(-1, payload.n) : -1;
+        return sendJson(res, 200, { skipDrawN });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/last-skip') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        lastSkip = { indexCount: payload.indexCount, startIndex: payload.startIndex, vs: payload.vs, ps: payload.ps, ts: Date.now() };
+        return sendEmpty(res, 204);
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/frame-stats') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        frameStats = { drawsPerFrame: payload.drawsPerFrame, activeSkipN: payload.activeSkipN, hooksInstalled: payload.hooksInstalled, presents: payload.presents };
+        console.log('[dbg] frame-stats:', frameStats);
+        return sendEmpty(res, 204);
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/shader-hist') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        if (Array.isArray(payload.pairs))
+            shaderHist = payload.pairs.map(p => ({ vs: String(p.vs), ps: String(p.ps), n: Number(p.n) })).sort((a, b) => a.n - b.n);
+        return sendEmpty(res, 204);
+    }
+
+    if (req.method === 'GET' && url.pathname === '/debug/shader-hist') {
+        return sendJson(res, 200, { pairs: shaderHist });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/skip-shader') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        if (!Array.isArray(payload.pairs)) return sendJson(res, 400, { error: 'pairs must be array' });
+        skipPairs = payload.pairs.map(p => ({ vs: String(p.vs), ps: String(p.ps) }));
+        return sendJson(res, 200, { skipPairs });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/skip-index-count') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        if (!Array.isArray(payload.counts)) return sendJson(res, 400, { error: 'counts must be array' });
+        skipIndexCounts = payload.counts.map(Number).filter(n => Number.isFinite(n) && n >= 0);
+        return sendJson(res, 200, { skipIndexCounts });
+    }
+
+    if (req.method === 'POST' && url.pathname === '/debug/index-count-hist') {
+        let payload;
+        try { payload = await parseBody(req); } catch (err) { return sendJson(res, 400, { error: err.message }); }
+        if (Array.isArray(payload.pairs))
+            indexCountHist = payload.pairs.map(p => ({ c: Number(p.c), n: Number(p.n) })).sort((a, b) => a.n - b.n);
+        return sendEmpty(res, 204);
+    }
+
+    if (req.method === 'GET' && url.pathname === '/debug/index-count-hist') {
+        return sendJson(res, 200, { pairs: indexCountHist });
+    }
+
     if (req.method === 'GET' && url.pathname === '/health') {
         // Twitch is considered connected if it sent a heartbeat in the last 60s
         const tc = twitchConnected && (Date.now() - twitchLastSeen < 60_000);
-        return sendJson(res, 200, { ok: true, queued: queue.length, enabled, twitchConnected: tc });
+        return sendJson(res, 200, { ok: true, queued: queue.length, enabled, twitchConnected: tc, gameRunning });
     }
 
     if (req.method === 'POST' && url.pathname === '/enable') {

@@ -282,6 +282,14 @@ bool RenderFrame()
     g_Context->OMSetRenderTargets(1, &rtv, nullptr);
     g_Context->OMSetBlendState(g_BlendState, nullptr, 0xffffffff);
     g_Context->Draw(3, 0);
+    {
+        static bool s_once = false;
+        if (!s_once) {
+            s_once = true;
+            void** vt = *reinterpret_cast<void***>(g_Context);
+            CFXLOG("effects::Draw vtable=%p slot13=%p ctx=%p", vt, vt[13], g_Context);
+        }
+    }
 
     // Restore render state
     g_Context->RSSetViewports(prevVPCount, &prevVP);

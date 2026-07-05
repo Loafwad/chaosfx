@@ -13,10 +13,28 @@
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_swapchain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\proxy_drawcall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\effects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\http_poll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\minhook\buffer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\minhook\hook.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\minhook\trampoline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\minhook\hde\hde32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nathb\dev\chaosfx\d3dproxy\src\minhook\hde\hde64.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

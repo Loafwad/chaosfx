@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(ChaosFXD3DProxy CXX)
+project(ChaosFXD3DProxy CXX C)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,14 +35,21 @@ add_library(d3d11 SHARED
     src/proxy_globals.cpp
     src/proxy_exports.cpp
     src/proxy_swapchain.cpp
+    src/proxy_drawcall.cpp
     src/effects.cpp
     src/http_poll.cpp
+    src/minhook/buffer.c
+    src/minhook/hook.c
+    src/minhook/trampoline.c
+    src/minhook/hde/hde32.c
+    src/minhook/hde/hde64.c
     ${EMBEDDED_SHADERS}
     d3d11.def
 )
 
 target_include_directories(d3d11 PRIVATE
     src
+    src/minhook
     "${CMAKE_CURRENT_BINARY_DIR}"
 )
 

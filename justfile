@@ -39,7 +39,7 @@ bd: build deploy
 
 # Wipe build directory (forces full reconfigure on next run)
 clean:
-    Remove-Item -Recurse -Force "{{build_dir}}"
+    Remove-Item -Recurse -Force "{{build_dir}}" -ErrorAction SilentlyContinue
 
 # Launch the bridge, Twitch listener, and open the UI in the browser
 run:

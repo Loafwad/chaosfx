@@ -1,5 +1,6 @@
 #include "proxy.h"
 #include "effects.h"
+#include "proxy_drawcall.h"
 #include <dxgi1_2.h>
 
 // IDXGIFactory vtable slot for CreateSwapChain
@@ -38,6 +39,13 @@ static PFN_Present g_OrigPresent = nullptr;
 
 static HRESULT STDMETHODCALLTYPE Hook_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
+    g_PresentCount.fetch_add(1, std::memory_order_relaxed);
+    Proxy_ResetDrawCounter();
+
+    // Hook draw calls lazily — runs every frame until installed
+    if (g_CfxContext && !g_HooksInstalled.load(std::memory_order_acquire))
+        Proxy_HookDrawCalls(g_CfxContext);
+
     // Initialize D3D11 effect objects on first call (idempotent CAS — runs only once)
     if (g_CfxDevice && g_CfxContext)
         chaosfx::effects::Initialize(g_CfxDevice, g_CfxContext, pSwapChain);
@@ -55,6 +63,8 @@ static void CaptureSwapChain(IDXGISwapChain* sc)
         g_CfxSwapChain->AddRef();
         OutputDebugStringA("[ChaosFXProxy] Swapchain captured, g_CfxReady=1\n");
         Proxy_HookPresent(sc);
+        if (g_CfxContext)
+            Proxy_HookDrawCalls(g_CfxContext);
     }
 }
 
